@@ -73,6 +73,7 @@ public class LionTest {
             "Самец, true",
             "Самка, false"
     })
+
     void doesHaveManeParameterized(String sex, boolean expectedHasMane) throws Exception {
         Lion lion = new Lion(felineMock, sex);
         assertEquals(expectedHasMane, lion.doesHaveMane());

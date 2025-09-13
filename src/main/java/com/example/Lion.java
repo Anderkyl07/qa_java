@@ -8,7 +8,6 @@ public class Lion {
 
     Feline feline;
 
-    // Инъекция зависимости через конструктор (исправленная версия для тестов)
     public Lion(Feline feline, String sex) throws Exception {
         this.feline = feline;
         if ("Самец".equals(sex)) {

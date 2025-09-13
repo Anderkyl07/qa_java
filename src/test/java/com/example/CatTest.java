@@ -25,6 +25,7 @@ public class CatTest {
         assertEquals("Мяу", cat.getSound());
     }
 
+
     @Test
     void getFoodReturnsFoodFromPredator() throws Exception {
         List<String> expectedFood = Arrays.asList("Животные", "Птицы", "Рыба");
