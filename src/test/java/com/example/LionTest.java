@@ -41,22 +41,34 @@ public class LionTest {
     }
 
     @Test
-    void getKittensReturnsValueFromFeline() {
+    void getKittensReturnsExpectedValue() {
         when(felineMock.getKittens()).thenReturn(3);
-
         Lion lion = null;
         try {
             lion = new Lion(felineMock, "Самец");
         } catch (Exception e) {
             fail("Не ожидалось исключение");
         }
-
+        // Проверка, что метод возвращает значение из Feline
         assertEquals(3, lion.getKittens());
+    }
+
+    @Test
+    void getKittensCallsFelineGetKittens() {
+        when(felineMock.getKittens()).thenReturn(3);
+        Lion lion = null;
+        try {
+            lion = new Lion(felineMock, "Самец");
+            lion.getKittens();  // вызываем, чтобы проверить вызов
+        } catch (Exception e) {
+            fail("Не ожидалось исключение");
+        }
+        // Проверка, что метод вызван один раз
         verify(felineMock, times(1)).getKittens();
     }
 
     @Test
-    void getFoodReturnsFoodFromFeline() throws Exception {
+    void getFoodReturnsCorrectFoodList() throws Exception {
         List<String> foods = Arrays.asList("Мясо", "Птицы");
         when(felineMock.getFood("Хищник")).thenReturn(foods);
 
@@ -64,6 +76,15 @@ public class LionTest {
         List<String> result = lion.getFood();
 
         assertEquals(foods, result);
+    }
+
+    @Test
+    void getFoodCallsFelineGetFoodWithCorrectParameter() throws Exception {
+        when(felineMock.getFood("Хищник")).thenReturn(Arrays.asList("Мясо", "Птицы"));
+
+        Lion lion = new Lion(felineMock, "Самка");
+        lion.getFood();
+
         verify(felineMock).getFood("Хищник");
     }
 
